@@ -54,9 +54,3 @@ def leftoverRecipe(leftover):
                     output.append(recipe_energe)
                     outputs.append(output)
     return outputs
-
-if __name__ == "__main__":
-    leftover = [['toast', 'egg', 'cucumber', 'tomato sauce', 'sheep flank hot pot slices'],
-                ['25g', '55g', '100g', '5g', '405g']]
-
-    print(leftoverRecipe(leftover))
