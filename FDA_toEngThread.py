@@ -6,7 +6,7 @@ import csv
 translator = google_trans_new.google_translator(timeout=5)
 
 # 輸入FDA資料
-fda_path = "C:/Users/user/Desktop/Tibame/Project/csv/fda_cleaning.csv"
+fda_path = "../csv/fda_cleaning.csv"
 # FDA資料 to DataFrame
 fda_df = pd.read_csv(fda_path)
 # FDA全樣品英文名稱
