@@ -1,0 +1,45 @@
+version: '3.6'
+
+services: 
+  python:
+    image: python:latest
+    ports:
+     - '80:80'
+    volumes:
+      - type: bind
+        source: .
+        target: /scripts
+    command: tail -f /dev/null
+    links:
+      - 'mysql'
+
+  mysql:
+    image: mysql:5.7
+    volumes: 
+      - mysql_data:/var/lib/mysql
+    ports:
+     - '3306:3306'
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_USER: test
+      MYSQL_PASSWORD: test
+      MYSQL_DATABASE: my_db
+      MYSQL_ALLOW_EMPTY_PASSWORD: 'yes'
+
+  notebook:
+    image: jupyter/tensorflow-notebook
+    container_name: jupyter
+    hostname: jupyter
+    restart: unless-stopped
+    volumes:
+      - ./work:/home/jovyan/work
+      - ./jupyter_notebook_config.py:/root/.jupyter/jupyter_notebook_config.py
+    ports:
+      - 9999:8888
+    environment:
+      - TZ=Asia/Taipei
+      - JUPYTER_ENABLE_LAB=yes
+
+volumes: 
+  mysql_data: {}
